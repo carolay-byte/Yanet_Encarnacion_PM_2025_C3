@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1758326197 source:c:\universidad\3er cuatrimestre\programacion para mecatronicos\yanet_encarnacion_pm_2025_c3\tarea_1\programas_1\p1.8\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+
