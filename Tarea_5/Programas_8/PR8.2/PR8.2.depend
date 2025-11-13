@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1762733223 source:c:\users\carolay\prog_meca\yanet_encarnacion_pm_2025_c3\tarea_5\programas_8\pr8.2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
