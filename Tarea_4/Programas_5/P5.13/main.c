@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* Ordenacion por insercion directa. */
+/* Ordenacion por seleccion directa. */
 
 const int MAX = 100;
 
 void Lectura(int *, int);
-void Ordena(int *, int);          /* Prototipos de funciones. */
+void Ordena(int *, int);            /* Prototipos de funciones. */
 void Imprime(int *, int);
 
 void main(void)
@@ -17,9 +17,8 @@ do
     printf("Ingrese el tamaño del arreglo: ");
     scanf("%d", &TAM);
 }
-while (TAM>MAX || TAM<1); /* Se verifica que el tamaño del arreglo sea
-                            correcto. */
-
+while (TAM>MAX || TAM<1);    /* Se verifica que el tamaño del arreglo sea
+                               correcto. */
 Lectura(VEC, TAM);
 Ordena(VEC, TAM);
 Imprime(VEC, TAM);
@@ -32,7 +31,7 @@ elementos de tipo entero. */
 int I;
 for (I=0; I<T; I++)
 {
-    printf("Ingrese el elemento %d: ", I + 1);
+    printf("Ingrese el elemento %d: ", I+1);
     scanf("%d", &A[I]);
 }
 }
@@ -46,19 +45,21 @@ for (I=0; I<T; I++)
     printf("\nA[%d]: %d", I, A[I]);
 }
 void Ordena(int A[], int T)
-/* La funcion Ordena utiliza el metodo de insercion directa para ordenar
+/* La funcion Ordena utiliza el metodo de seleccion directa para ordenar
 los elementos del arreglo unidimensional A. */
 {
-int AUX, L, I;
-for (I=1; I<T; I++)
-{
-    AUX = A[I];
-    L = I - 1;
-    while ((L >= 0) && (AUX < A[L]))
+    int I, J, MEN, L;
+    for (I=0; I < (T-1); I++)
     {
-        A[L+1] = A[L];
-        L--;
+        MEN = A[I];
+        L = I;
+        for (J=(I+1); J<T; J++)
+            if (A[J] < MEN)
+        {
+            MEN = A[J];
+            L = J;
+        }
+        A[L] = A[I];
+        A[I] = MEN;
     }
-    A[L+1] = AUX;
-}
 }
