@@ -15,7 +15,7 @@ typedef union               /* Declaracion de la union fpago. */
 {
    banco che;          /* Cheque. Campo de tipo estructura banco. */
    banco nomi;         /* Comica. Campo de tipo estructura banco. */
-   cher venta;         /* Ventanilla. */
+   char venta;         /* Ventanilla. */
 } fpago;
 
 typedef struct               /* Declaracion de la estructura domicilio. */
@@ -191,4 +191,8 @@ vendedores cuyas ventas anueles superaron $1,500,000. */
         printf("\n\t\tVendedores con Cuenta en el Banco");
         for (I=0; I<T; I++)
             if (A[I].cla == 1)
+                printf("\nNumero de vendedor: %d\n Banco: %s\nCuenta: %s",
+                       A[I].num,
+                       A[I].pago.che.noba, A[I].pago.che.nucu);
+
     }
