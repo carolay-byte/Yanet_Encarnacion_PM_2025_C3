@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct Libro {
+typedef struct Libro
+{
     int ano;
     char autor[50];
     char titulo[50];
@@ -17,7 +18,8 @@ typedef struct Libro {
         FUNCIONES
 ================================ */
 
-Libro* crearLibro() {
+Libro* crearLibro()
+{
     Libro *nuevo = (Libro*)malloc(sizeof(Libro));
 
     printf("Ano: ");
@@ -46,12 +48,16 @@ Libro* crearLibro() {
     return nuevo;
 }
 
-void agregarLibro(Libro **lista) {
+void agregarLibro(Libro **lista)
+{
     Libro *nuevo = crearLibro();
 
-    if (*lista == NULL) {
+    if (*lista == NULL)
+    {
         *lista = nuevo;
-    } else {
+    }
+    else
+    {
         Libro *temp = *lista;
         while (temp->next != NULL)
             temp = temp->next;
@@ -63,15 +69,18 @@ void agregarLibro(Libro **lista) {
     IMPRIMIR LISTA
 ================================ */
 
-void imprimirLibros(Libro *lista) {
-    if (lista == NULL) {
+void imprimirLibros(Libro *lista)
+{
+    if (lista == NULL)
+    {
         printf("\nLa lista está vacía.\n");
         return;
     }
 
     Libro *temp = lista;
     printf("\n========= LISTA DE LIBROS =========\n");
-    while (temp != NULL) {
+    while (temp != NULL)
+    {
         printf("Ano: %d\n", temp->ano);
         printf("Autor: %s\n", temp->autor);
         printf("Titulo: %s\n", temp->titulo);
@@ -87,15 +96,18 @@ void imprimirLibros(Libro *lista) {
     BUSCAR POR AUTOR
 ================================ */
 
-void buscarPorAutor(Libro *lista, char autorBuscado[]) {
+void buscarPorAutor(Libro *lista, char autorBuscado[])
+{
     Libro *temp = lista;
     int encontrado = 0;
 
     printf("\nResultados para autor '%s':\n", autorBuscado);
     printf("----------------------------------\n");
 
-    while (temp != NULL) {
-        if (strcmp(temp->autor, autorBuscado) == 0) {
+    while (temp != NULL)
+    {
+        if (strcmp(temp->autor, autorBuscado) == 0)
+        {
             printf("Titulo: %s | Precio: %.2f | Ano: %d | Codigo: %d\n",
                    temp->titulo, temp->precio, temp->ano, temp->codigo);
             encontrado = 1;
@@ -111,19 +123,23 @@ void buscarPorAutor(Libro *lista, char autorBuscado[]) {
     ORDENAR POR PRECIO (BUBBLE SORT)
 ================================ */
 
-void bubbleSort(Libro *lista) {
+void bubbleSort(Libro *lista)
+{
     if (lista == NULL) return;
 
     int cambiado;
     Libro *ptr;
     Libro *ultimo = NULL;
 
-    do {
+    do
+    {
         cambiado = 0;
         ptr = lista;
 
-        while (ptr->next != ultimo) {
-            if (ptr->precio > ptr->next->precio) {
+        while (ptr->next != ultimo)
+        {
+            if (ptr->precio > ptr->next->precio)
+            {
                 // intercambiar valores
                 float tempPrecio = ptr->precio;
                 ptr->precio = ptr->next->precio;
@@ -156,19 +172,22 @@ void bubbleSort(Libro *lista) {
             ptr = ptr->next;
         }
         ultimo = ptr;
-    } while (cambiado);
+    }
+    while (cambiado);
 }
 
 /* ================================
             MAIN
 ================================ */
 
-int main() {
+int main()
+{
     Libro *lista = NULL;
     int opcion;
     char autor[50];
 
-    do {
+    do
+    {
         printf("\n========= MENU =========\n");
         printf("1. Agregar libro\n");
         printf("2. Buscar por autor\n");
@@ -178,37 +197,39 @@ int main() {
         printf("Seleccione: ");
         scanf("%d", &opcion);
 
-        switch (opcion) {
-            case 1:
-                agregarLibro(&lista);
-                break;
+        switch (opcion)
+        {
+        case 1:
+            agregarLibro(&lista);
+            break;
 
-            case 2:
-                printf("Ingrese el autor a buscar: ");
-                getchar();
-                fgets(autor, 50, stdin);
-                autor[strcspn(autor, "\n")] = '\0';
-                buscarPorAutor(lista, autor);
-                break;
+        case 2:
+            printf("Ingrese el autor a buscar: ");
+            getchar();
+            fgets(autor, 50, stdin);
+            autor[strcspn(autor, "\n")] = '\0';
+            buscarPorAutor(lista, autor);
+            break;
 
-            case 3:
-                bubbleSort(lista);
-                printf("\nLa lista ha sido ordenada por precio.\n");
-                break;
+        case 3:
+            bubbleSort(lista);
+            printf("\nLa lista ha sido ordenada por precio.\n");
+            break;
 
-            case 4:
-                imprimirLibros(lista);
-                break;
+        case 4:
+            imprimirLibros(lista);
+            break;
 
-            case 5:
-                printf("Saliendo...\n");
-                break;
+        case 5:
+            printf("Saliendo...\n");
+            break;
 
-            default:
-                printf("Opcion invalida.\n");
+        default:
+            printf("Opcion invalida.\n");
         }
 
-    } while (opcion != 5);
+    }
+    while (opcion != 5);
 
     return 0;
 }

@@ -121,6 +121,86 @@ obtener el total de las ventas, se actualiza el inventario. */
         printf("\nTotal de la venta: %f", TOT);
     }
 
+void Reabastecimiento(producto A[], int T)
+/* Esta funcion se utiliza para reabastecer al inventario. */
+{
+    int CLA,CAN,I;
+    printf("\nIngrese clave del producto -0 para salir-: ");
+    scanf("%d", &CLA);
+    while (CLA)
+    {
+        I = 0;
+        while ((I < T) && (A[I].clave < CLA))
+            I++;
+        if ((I==T) || (A[I].clave > CLA))
+            printf("\nLa clave del producto ingresada es correcta");
+        else
+        {
+            printf("\tCantidad: ");
+            scanf("%d", &CAN);
+            A[I].existencia += CAN;
+        }
+        printf("\nIngrese otra clave del producto -0 para salir-: ");
+        scanf("%d", &CLA);
+    }
+}
 
+void Nuevos_Productos(producto A[], int *T)
+/* Esta se utiliza para incorporar nuevos productos al inventario
+dado que los productos se encuentran ordenados por clave. */
+{
+  int CLA,I,J;
+    printf("\nIngrese clave del producto -0 para salir-: ");
+    scanf("%d", &CLA);
+    while ((*T < 30) && (CLA))
+    {
+        I = 0;
+        while ((I < *T) && (A[I].clave < CLA))
+            I++;
+        if ((I == *T)
+            {
+                A[I].clave = CLA;
+                printf("\tNombre:");
+                fflush(studin);
+                gets(A[I].nombre);
+                printf("\tPrecio:");
+                scanf("%f", &A[I].precio);
+                printf("\tCantidad: ");
+                scanf("%d", &A[I].existencia);
+                *T = *T + 1;
+            }
+            else
+                if (A[I].clave == CLA)
+                printf("\nEl producto ya se encuentra en el inventario");
+        else
+        {
+            for (J=*T; J>I; J--)
+            A[J] = A[J-1];
+            A[I].clave = CLA;
+                printf("\tNombre:");
+                fflush(studin);
+                gets(A[I].nombre);
+                printf("\tPrecio:");
+                scanf("%f", &A[I].precio);
+                printf("\tCantidad: ");
+                scanf("%d", &A[I].existencia);
+                *T = *T + 1;
+        }
+        Printf("\nIngrese clave del producto -0 para salir-: ");
+    scanf("%d", &CLA);
+    }
+    if (*T == 30)
+       Printf("\nYa no hay espacio para incorporar nuevos productos");
+}
 
+void Inventario(producto A[], int T)
+{
+    int I;
+    for (I=0; I<T; I++)
+    {
+        printf("\nClave: %d", A[I].clave);
+        printf("\tNombre: %s", A[I].nombre);
+        printf("\tPrecio: %d", A[I].precio);
+        printf("\tExistencia: %d \n", A[I].existencia);
+}
 }
